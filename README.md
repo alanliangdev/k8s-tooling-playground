@@ -7,10 +7,9 @@ The goal of this project is to provide an "easy button" for developers and platf
 ## Prerequisites
 
 Before starting, please ensure the following are installed:
-* Docker (or Docker Desktop)
-* Kind
-* kubectl
-* git
+* Docker, Kind, kubectl, Helm, and git.
+
+👉 [**View the CLI Installation Guide**](docs/binary-install.md) for detailed instructions.
 
 ## Getting Started
 
