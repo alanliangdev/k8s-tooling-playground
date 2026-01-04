@@ -126,7 +126,7 @@ kubectl wait --for=condition=available --timeout=300s deployment/kube-prometheus
 # Deployment Summary
 echo -e "${GREEN}--------------------------------------------------${NC}"
 echo -e "${GREEN}✅ BOOTSTRAP COMPLETE!${NC}"
-echo -e "${BLUE}Argo CD UI:  ${NC} https://localhost:8080"
+echo -e "${BLUE}Argo CD UI:  ${NC} https://localhost:8080 (admin)"
 echo -e "${BLUE}Grafana:     ${NC} http://localhost:3000 (admin/admin)"
 echo -e "${BLUE}Prometheus:  ${NC} http://localhost:9090"
 echo -e "${GREEN}--------------------------------------------------${NC}"

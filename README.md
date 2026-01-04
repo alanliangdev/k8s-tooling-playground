@@ -4,12 +4,16 @@ This repository is designed as a growing, extensible sandbox for exploring the K
 
 The goal of this project is to provide an "easy button" for developers and platform engineers to experiment with tools like Prometheus, Grafana, Kro, and Ingress controllers without the manual labour of individual installations.
 
+> ⚠️ **Disclaimer:** This playground is **not production ready**. It employs several shortcuts for ease of use, such as default admin credentials for Argo CD and Grafana, and lacks SSL/TLS certificates. It is designed strictly for local development and experimentation.
+
 ## Prerequisites
 
 Before starting, please ensure the following are installed:
 * Docker, Kind, kubectl, Helm, and git.
 
 👉 [View the CLI Installation Guide](docs/binary-install.md) for detailed instructions.
+
+> ⚠️ **Network Requirement:** This playground requires unrestricted internet access to pull container images (Docker Hub, Quay, etc.) and download Helm charts. If you are behind a corporate firewall or VPN that blocks public registries, the bootstrap process may fail.
 
 ## Getting Started
 
@@ -67,7 +71,6 @@ As this repository grows, new tools will be added to the apps directory. To test
    git add .
    git commit -m "Update tool configuration"
    git push origin main
-   git push origin mainit 
    ```
 
 3. **Observe:** Watch the Argo CD UI as it detects the "Out of Sync" state and automatically reconciles your cluster to match your Git repository.
