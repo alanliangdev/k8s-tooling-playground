@@ -1,0 +1,38 @@
+# 1. Define the Gang
+apiVersion: scheduling.k8s.io/v1alpha1
+kind: Workload
+metadata:
+  name: failing-gang
+spec:
+  podGroups:
+  - name: "high-cpu-group"
+    policy:
+      gang:
+        minCount: 3
+---
+# 2. The High-Resource Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heavy-worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: heavy-worker
+  template:
+    metadata:
+      labels:
+        app: heavy-worker
+    spec:
+      workloadRef:
+        name: failing-gang
+        podGroup: "high-cpu-group"
+      containers:
+      - name: worker
+        image: busybox
+        command: ["sh", "-c", "sleep 3600"]
+        resources:
+          requests:
+            # Adjust this number higher if your nodes are large
+            cpu: "100"

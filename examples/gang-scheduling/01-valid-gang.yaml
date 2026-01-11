@@ -1,0 +1,36 @@
+# 1. Define the Gang (The Workload)
+apiVersion: scheduling.k8s.io/v1alpha1
+kind: Workload
+metadata:
+  name: batch-job-gang
+spec:
+  podGroups:
+  - name: "compute-group"
+    policy:
+      gang:
+        # The scheduler will wait until all pods can be placed
+        minCount: 3
+---
+# 2. The Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parallel-batch
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: batch-worker
+  template:
+    metadata:
+      labels:
+        app: batch-worker
+    spec:
+      workloadRef:
+        name: batch-job-gang
+        podGroup: "compute-group"
+      containers:
+      - name: worker
+        image: busybox
+        # Simple command to simulate work
+        command: ["sh", "-c", "echo Working... && sleep 3600"]
